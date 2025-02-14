@@ -1,0 +1,96 @@
+{
+    "name": "@elizaos/plugin-evm",
+    "version": "0.1.9",
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        "./package.json": "./package.json",
+        ".": {
+            "import": {
+                "@elizaos/source": "./src/index.ts",
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            }
+        }
+    },
+    "files": ["dist"],
+    "dependencies": {
+        "@abernatskiy/erc20-transfers-jellyfish": "^0.0.0",
+        "@abernatskiy/http-client": "9.0.1",
+        "@abernatskiy/portal-client": "^9.0.0",
+        "@abernatskiy/uniswapv3-pool-swaps": "^0.0.0",
+        "@dsnp/parquetjs": "^1.8.5",
+        "@elizaos/core": "^0.1.9",
+        "@types/json2csv": "^5.0.7",
+        "json2csv": "6.0.0-alpha.2",
+        "tsup": "8.3.5",
+        "viem": "^2.23.2",
+        "zod": "3.23.8"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.9.4",
+        "@types/node": "^22.13.1",
+        "tsup": "^8.3.6",
+        "typescript": "^5.7.3",
+        "vitest": "^1.2.2"
+    },
+    "scripts": {
+        "build": "tsup --format esm --dts",
+        "dev": "tsup --format esm --dts --watch",
+        "test": "vitest run",
+        "lint": "biome lint .",
+        "lint:fix": "biome check --apply .",
+        "format": "biome format .",
+        "format:fix": "biome format --write ."
+    },
+    "peerDependencies": {
+        "whatwg-url": "7.1.0"
+    },
+    "agentConfig": {
+        "pluginType": "elizaos:plugin:1.0.0",
+        "pluginParameters": {
+            "SQD_PORTAL_URL": {
+                "type": "string",
+                "description": "SubQuery Portal URL for the Arbitrum One dataset"
+            },
+            "SQD_RPC_URL": {
+                "type": "string",
+                "description": "RPC URL for Arbitrum network"
+            },
+            "SQD_ERC20_FROM_ADDRESS": {
+                "type": "string",
+                "description": "Source address for ERC20 transfer filtering"
+            },
+            "SQD_ERC20_TO_ADDRESS": {
+                "type": "string",
+                "description": "Destination address for ERC20 transfer filtering"
+            },
+            "SQD_ERC20_START_BLOCK": {
+                "type": "string",
+                "description": "Starting block number for ERC20 transfer queries"
+            },
+            "SQD_ERC20_END_BLOCK": {
+                "type": "string",
+                "description": "Ending block number for ERC20 transfer queries"
+            },
+            "SQD_ERC20_CONTRACT_ADDRESS": {
+                "type": "string",
+                "description": "ERC20 token contract address to monitor"
+            },
+            "SQD_UNISWAP_START_BLOCK": {
+                "type": "string",
+                "description": "Starting block number for Uniswap swap queries"
+            },
+            "SQD_UNISWAP_END_BLOCK": {
+                "type": "string",
+                "description": "Ending block number for Uniswap swap queries"
+            },
+            "SQD_UNISWAP_POOL_ADDRESS": {
+                "type": "string",
+                "description": "Uniswap V3 pool contract address to monitor"
+            }
+        }
+    }
+}

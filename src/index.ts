@@ -1,0 +1,21 @@
+import { Plugin } from '@elizaos/core';
+import { erc20Provider, uniswapProvider } from './providers';
+import { getErc20TransfersAction } from './actions';
+import { getUniswapSwapsAction } from './actions/uniswap/uniswap.action';
+
+// Add BigInt serialization support for JSON.stringify
+(BigInt.prototype as unknown as { toJSON: () => string }).toJSON = function () {
+    return this.toString();
+};
+
+export { erc20Provider, uniswapProvider, getErc20TransfersAction, getUniswapSwapsAction };
+
+export const sqdPlugin: Plugin = {
+    name: 'SQD',
+    description: 'On-chain data lake for AI agents',
+    actions: [getErc20TransfersAction, getUniswapSwapsAction],
+    evaluators: [],
+    providers: [erc20Provider, uniswapProvider],
+};
+
+export default sqdPlugin;
